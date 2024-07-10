@@ -18,11 +18,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-/*
-Platform  Firebase App Id
-android   1:172407271569:android:81b72c0bd8483e23d50f30
-ios       1:172407271569:ios:061cbb2ea333cdc3d50f30
-*/
 
 final appTheme = ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(214, 48, 58, 203), ),
