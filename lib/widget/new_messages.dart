@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_app/services/encryption_service.dart' as encryptionService;
+
+
+final encrypter = encryptionService.EncService();
 
 class NewMsgWidget extends StatefulWidget{
   const NewMsgWidget({super.key});
@@ -38,10 +42,14 @@ class _NewMsgWidget extends State<NewMsgWidget>{
     final userData = await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get();
     final userName = userData.data()!['username'];
     final userPhoto = userData.data()!['profilePhoto'];
+    print(enteredMsg);
+    final encryptedmsg = encrypter.encrypt(enteredMsg);
+;
+    print(encryptedmsg);
 
     //file name is chosen by the backend. 
     FirebaseFirestore.instance.collection('chatMsg').add({
-      'message' : enteredMsg,
+      'message' : encryptedmsg,
       'timeCreated' : Timestamp.now(),
       'userId' :  currentUser.uid,
       'userName' : userName,

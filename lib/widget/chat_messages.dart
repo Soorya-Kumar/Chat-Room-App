@@ -1,7 +1,10 @@
+import 'package:chat_app/services/encryption_service.dart' as encryptionService;
 import 'package:chat_app/widget/message_bubble.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+final encrypter = encryptionService.EncService();
 
 class ChatMsgWidget extends StatelessWidget{
   const ChatMsgWidget({super.key});
@@ -59,16 +62,17 @@ class ChatMsgWidget extends StatelessWidget{
                     nextChatMessage != null ? nextChatMessage['userId'] : null;
 
                 final isUserSame = currentMessageUser == nextMessageUser;
+                final decryptedmsg = encrypter.decrypt(chatMessage['message']);
 
                 if (isUserSame) {
                   return MessageBubble.next(
-                      message: chatMessage['message'],
+                      message: decryptedmsg,
                       isMe: currAppUser == currentMessageUser);
                 } else {
                   return MessageBubble.first(
                       userImage: chatMessage['profilePhoto'],
                       username: chatMessage['userName'],
-                      message: chatMessage['message'],
+                      message: decryptedmsg,
                       isMe: currAppUser == currentMessageUser);
                 }
               });

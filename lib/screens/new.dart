@@ -54,7 +54,7 @@ class _NewAuthScreen extends State<NewAuthScreen> {
       });
 
       if (_isloginmode) {
-        final userCredentials = await _firebaseAuth.signInWithEmailAndPassword(
+        await _firebaseAuth.signInWithEmailAndPassword(
             email: _enteredemail, password: _enteredpassword);
       }
 
