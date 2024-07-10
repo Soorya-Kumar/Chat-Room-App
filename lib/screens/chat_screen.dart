@@ -37,6 +37,8 @@ class _ChatScreeenState extends State<ChatScreeen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Chat Screen'),
+          backgroundColor: Colors.green[50],
+          foregroundColor: const Color.fromARGB(255, 0, 19, 2),
           actions: [
             IconButton(
               onPressed: () {
