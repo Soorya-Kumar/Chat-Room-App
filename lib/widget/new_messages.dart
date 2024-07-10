@@ -42,10 +42,9 @@ class _NewMsgWidget extends State<NewMsgWidget>{
     final userData = await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get();
     final userName = userData.data()!['username'];
     final userPhoto = userData.data()!['profilePhoto'];
-    print(enteredMsg);
+    //print(enteredMsg);
     final encryptedmsg = encrypter.encrypt(enteredMsg);
-;
-    print(encryptedmsg);
+    //print(encryptedmsg);
 
     //file name is chosen by the backend. 
     FirebaseFirestore.instance.collection('chatMsg').add({
